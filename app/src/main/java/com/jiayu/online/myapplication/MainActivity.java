@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/***
+ * commonbase 库项目
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

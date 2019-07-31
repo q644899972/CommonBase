@@ -1,10 +1,6 @@
 package com.wb.commonbase.http;
 
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.wb.commonbase.base.BaseApplication;
+import android.content.Context;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,17 +15,20 @@ public class RetrofitClient {
     private static RetrofitClient instance;
     private static OkHttpClient okHttpClient;
     private static Retrofit retrofit;
+    static Context context;
+
 
     private RetrofitClient() {
 
-        ClearableCookieJar cookieJar =
-                new PersistentCookieJar(new SetCookieCache(),
-                        new SharedPrefsCookiePersistor(BaseApplication.getApplication()));
+
+//        ClearableCookieJar cookieJar =
+//                new PersistentCookieJar(new SetCookieCache(),
+//                        new SharedPrefsCookiePersistor(context));
 
         okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(15, TimeUnit.SECONDS)
-                .cookieJar(cookieJar)
+//                .cookieJar(cookieJar)
                 .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .addInterceptor(InterceptorUtil.logInterceptor())
@@ -48,6 +47,19 @@ public class RetrofitClient {
 
 
     public static RetrofitClient getInstance() {
+        if (instance == null) {
+            synchronized (RetrofitClient.class) {
+                if (instance == null) {
+                    instance = new RetrofitClient();
+                }
+            }
+        }
+        return instance;
+    }
+
+
+    public static RetrofitClient getInstance(Context c ) {
+         context = c;
         if (instance == null) {
             synchronized (RetrofitClient.class) {
                 if (instance == null) {

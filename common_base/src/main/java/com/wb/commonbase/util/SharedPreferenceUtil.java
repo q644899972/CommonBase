@@ -12,7 +12,7 @@ public class SharedPreferenceUtil {
     }
 
     public static void write(String name, String key, Object value) {
-        SharedPreferences sp = BaseApplication.getApplication().getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         if (value instanceof String) {
             editor.putString(key, (String) value);
@@ -28,18 +28,23 @@ public class SharedPreferenceUtil {
         editor.apply();
     }
 
+    static Context context;
+    public  static void init(Context c){
+          context = c;
+    }
+
     public static String read(String name, String key, String defValue) {
-        SharedPreferences sp = BaseApplication.getApplication().getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
         return sp.getString(key, defValue);
     }
 
     public static int read(String name, String key, int defValue) {
-        SharedPreferences sp = BaseApplication.getApplication().getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
         return sp.getInt(key, defValue);
     }
 
     public static boolean read(String name, String key, boolean defValue) {
-        SharedPreferences sp = BaseApplication.getApplication().getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
         return sp.getBoolean(key, defValue);
     }
 

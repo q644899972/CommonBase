@@ -1,12 +1,11 @@
 package com.wb.commonbase.http;
 
+import android.content.Context;
 import android.net.ParseException;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.JsonParseException;
-import com.wb.commonbase.base.BaseApplication;
 
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
@@ -25,6 +24,11 @@ public class ExceptionHandler {
     private static final int BAD_GATEWAY = 502;
     private static final int SERVICE_UNAVAILABLE = 503;
     private static final int GATEWAY_TIMEOUT = 504;
+
+    static Context context;
+    public  static void init(Context c){
+        context = c;
+    }
 
     public static void handleException(Throwable e) {
         String errmsg;
@@ -66,7 +70,7 @@ public class ExceptionHandler {
         } else {
             errmsg = "网络连接异常,请稍后重试";
         }
-        Toast.makeText(BaseApplication.getApplication(), errmsg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, errmsg, Toast.LENGTH_LONG).show();
     }
 
     private static final int BIZ_TO_LOGIN = 4002;
@@ -88,8 +92,8 @@ public class ExceptionHandler {
      * 跳转到登录界面
      */
     private static void gotoLoginActivity() {
-        ARouter.getInstance()
-                .build("/user/LoginActivity")
-                .navigation();
+//        ARouter.getInstance()
+//                .build("/user/LoginActivity")
+//                .navigation();
     }
 }
