@@ -68,6 +68,9 @@ dependencies {
     api rootProject.ext.dependencies['andpermission']
     api rootProject.ext.dependencies['eventbus']
     api rootProject.ext.dependencies['aspectj']
+
+    api   "com.scwang.smartrefresh:SmartRefreshHorizontal:0.0.1"
+
     //autosize
 //    api rootProject.ext.dependencies['autosize']
     //高德地图
