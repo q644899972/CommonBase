@@ -13,6 +13,7 @@ public class TaotutuManager {
     static String uid;
 
     public static void  init(Context c){
+
         context  = c;
         RetrofitClient.getInstance(context);
         SharedPreferenceUtil.init(context);
