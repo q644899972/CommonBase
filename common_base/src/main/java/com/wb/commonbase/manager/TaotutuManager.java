@@ -25,9 +25,7 @@ public class TaotutuManager {
     }
 
 
-    public void getParams(){
 
-    }
 
     public static String getAccessSecret() {
         return accessSecret;
